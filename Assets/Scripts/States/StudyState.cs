@@ -35,7 +35,7 @@ public class StudyState : State<Student>
     {
         Debug.Log("Entering Study State");
 
-        _owner.StartCoroutine(_owner.WaitForDuration(3.0f));
+        _owner.StartCoroutine(_owner.WaitForDuration(10.0f));
     }
 
     public override void ExitState(Student _owner)

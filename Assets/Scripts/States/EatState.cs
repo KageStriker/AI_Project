@@ -38,9 +38,24 @@ public class EatState : State<Student>
     public override void ExitState(Student _owner)
     {
         Debug.Log("Exiting Eating State");
+        _owner.SetEnergy(100);
     }
 
     public override void UpdateState(Student _owner)
     {
+        _owner.SetEnergy(_owner.GetEnergy() + (Time.deltaTime * 2.5f));
+
+        if (_owner.GetEnergy() >= 100)
+        {
+            if (_owner.GetStamina() < 30)
+            {
+                _owner.STE = StateToEnter.Sleep;
+                _owner.StateMachine.ChangeState(MoveToTaskState.Instance);
+            }
+            else
+            {
+                _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+            }
+        }
     }
 }
