@@ -18,10 +18,6 @@ public class MoveToTaskState : State<Student>
 {
     private static MoveToTaskState _instance;
     
-    /////////////////////////// 
-    private static int position;
-    ///////////////////////////
-
     private List<GameObject> studyAreas;
     private List<GameObject> eatingAreas;
     private List<GameObject> sleepAreas;
@@ -148,17 +144,11 @@ public class MoveToTaskState : State<Student>
                     {
                         continue;
                     }
-                    else if(!studyOpenings[i] && i >= studyAreas.Count - 1 || _owner.GetEnergy() < 30 || _owner.GetStamina() < 30)
-                    {
-                        _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
-                        position--;
-                    }
                     else
                     {
                         _owner.nmAgent.SetDestination(studyAreas[i].transform.position);
                         _owner.finalDestination = studyAreas[i].transform.position;
                         studyOpenings[i] = false;
-                        position++;
                         break;
                     }
                 }
@@ -170,17 +160,11 @@ public class MoveToTaskState : State<Student>
                     {
                         continue;
                     }
-                    else if (!eatingOpenings[i] && i >= eatingAreas.Count - 1 || _owner.GetEnergy() < 30 || _owner.GetStamina() < 30)
-                    {
-                        _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
-                        position--;
-                    }
                     else
                     {
                         _owner.nmAgent.SetDestination(eatingAreas[i].transform.position);
                         _owner.finalDestination = eatingAreas[i].transform.position;
                         eatingOpenings[i] = false;
-                        position++;
                         break;
                     }
                 }
@@ -196,12 +180,13 @@ public class MoveToTaskState : State<Student>
             case StateToEnter.NewClassroom:
                 break;
         }
+
+
     }
 
     public override void ExitState(Student _owner)
     {
         Debug.Log("Exiting Move To State");
-        position--;
     }
 
     public override void UpdateState(Student _owner)
