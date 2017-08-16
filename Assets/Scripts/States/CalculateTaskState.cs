@@ -43,11 +43,11 @@ public class CalculateTaskState : State<Student>
         {
             _owner.STE = StateToEnter.Work;
         }
-        else if (_owner.GetEnergy() >= 30 && _owner.GetStamina() >= 30)
+        else if (_owner.GetEnergy() >= 50 && _owner.GetStamina() >= 50)
         {
             _owner.STE = StateToEnter.Study;
         }
-        else if (_owner.GetEnergy() < 30 || _owner.GetStamina() < 30)
+        else if (_owner.GetEnergy() < 50 || _owner.GetStamina() < 50)
         {
             if (_owner.GetEnergy() < _owner.GetStamina())
             {
@@ -57,7 +57,7 @@ public class CalculateTaskState : State<Student>
             {
                 _owner.STE = StateToEnter.Sleep;
             }
-            else if (_owner.GetEnergy() < 10 && _owner.GetStamina() < 10)
+            else if (_owner.GetEnergy() < 10 || _owner.GetStamina() < 10)
             {
                 _owner.STE = StateToEnter.DropOut;
             }

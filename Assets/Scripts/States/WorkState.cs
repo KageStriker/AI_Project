@@ -39,7 +39,6 @@ public class WorkState : State<Student>
     public override void ExitState(Student _owner)
     {
         Debug.Log("Exiting Study State");
-        _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
     }
 
     public override void UpdateState(Student _owner)

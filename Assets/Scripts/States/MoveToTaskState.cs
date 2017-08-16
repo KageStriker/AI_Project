@@ -134,6 +134,10 @@ public class MoveToTaskState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering Move To State");
+        for (int i = 0; i < eatingOpenings.Length; i++)
+        {
+            Debug.Log(eatingOpenings[i]); 
+        }
 
         switch (_owner.STE)
         {
@@ -146,6 +150,8 @@ public class MoveToTaskState : State<Student>
                     }
                     else
                     {
+                        if (_owner.nmAgent.isStopped)
+                            _owner.nmAgent.isStopped = false;
                         _owner.nmAgent.SetDestination(studyAreas[i].transform.position);
                         _owner.finalDestination = studyAreas[i].transform.position;
                         studyOpenings[i] = false;
@@ -162,6 +168,8 @@ public class MoveToTaskState : State<Student>
                     }
                     else
                     {
+                        if (_owner.nmAgent.isStopped)
+                            _owner.nmAgent.isStopped = false;
                         _owner.nmAgent.SetDestination(eatingAreas[i].transform.position);
                         _owner.finalDestination = eatingAreas[i].transform.position;
                         eatingOpenings[i] = false;
@@ -170,6 +178,22 @@ public class MoveToTaskState : State<Student>
                 }
                 break;
             case StateToEnter.Sleep:
+                for (int i = 0; i < sleepAreas.Count; i++)
+                {
+                    if (!sleepOpenings[i])
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if (_owner.nmAgent.isStopped)
+                            _owner.nmAgent.isStopped = false;
+                        _owner.nmAgent.SetDestination(sleepAreas[i].transform.position);
+                        _owner.finalDestination = sleepAreas[i].transform.position;
+                        sleepOpenings[i] = false;
+                        break;
+                    }
+                }
                 break;
             case StateToEnter.Work:
                 break;
@@ -187,6 +211,13 @@ public class MoveToTaskState : State<Student>
     public override void ExitState(Student _owner)
     {
         Debug.Log("Exiting Move To State");
+        for (int i = 0; i < sleepAreas.Count; i++)
+        {
+            if (sleepAreas[i] == _owner.gameObject)
+            {
+                sleepOpenings[i] = true;
+            } 
+        }
     }
 
     public override void UpdateState(Student _owner)
@@ -194,10 +225,10 @@ public class MoveToTaskState : State<Student>
         _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * 1.3f));
         _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * 1.5f));
 
-        if (Vector3.Distance(_owner.gameObject.transform.position, _owner.finalDestination) < 0.5f)
+        if (Vector3.Distance(_owner.gameObject.transform.position, _owner.finalDestination) < 0.5f || _owner.nmAgent.isStopped)
         {
             _owner.nmAgent.isStopped = true;
-
+            
             switch (_owner.STE)
             {
                 case StateToEnter.Study:

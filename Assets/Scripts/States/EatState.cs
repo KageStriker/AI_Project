@@ -43,7 +43,7 @@ public class EatState : State<Student>
 
     public override void UpdateState(Student _owner)
     {
-        _owner.SetEnergy(_owner.GetEnergy() + (Time.deltaTime * 2.5f));
+        _owner.SetEnergy(_owner.GetEnergy() + (Time.deltaTime * 5.0f));
 
         if (_owner.GetEnergy() >= 100)
         {
