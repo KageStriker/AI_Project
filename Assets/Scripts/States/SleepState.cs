@@ -33,15 +33,31 @@ public class SleepState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering Sleep State");
+
+        _owner.StartCoroutine(_owner.WaitForDuration(10.0f));
     }
 
     public override void ExitState(Student _owner)
     {
         Debug.Log("Entering Sleep State");
+        _owner.SetStamina(100);
     }
 
     public override void UpdateState(Student _owner)
     {
-        
+        _owner.SetStamina(_owner.GetStamina() + (Time.deltaTime * 5.0f));
+
+        if (_owner.GetStamina() >= 100)
+        {
+            if (_owner.GetEnergy() < 30)
+            {
+                _owner.STE = StateToEnter.Eat;
+                _owner.StateMachine.ChangeState(MoveToTaskState.Instance);
+            }
+            else
+            {
+                _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+            }
+        }
     }
 }

@@ -9,9 +9,12 @@ public class Student : MonoBehaviour
 {
     public float energy = 100;
     public float stamina = 100;
+
     protected float hunger = 0;
     protected float reputation = 0;
     protected float money = 30;
+
+    protected int locationIndex;
 
     public bool waitComplete;
 
@@ -61,6 +64,21 @@ public class Student : MonoBehaviour
     public int GetMoney()
     {
         return Mathf.RoundToInt(money);
+    }
+
+    public int GetHouseNumber()
+    {
+        return Mathf.RoundToInt(money);
+    }
+
+    public int GetLocationIndex()
+    {
+        return locationIndex;
+    }
+    
+    public void SetLocationIndex(int _locationIndex)
+    {
+        locationIndex = _locationIndex;
     }
 
     public void SetEnergy(float _energy)

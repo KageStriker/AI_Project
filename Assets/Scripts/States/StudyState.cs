@@ -51,7 +51,7 @@ public class StudyState : State<Student>
             _owner.waitComplete = false;
         }
 
-        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * 1.5f));
-        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * 1.3f));
+        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * 1.1f));
+        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * 0.8f));
     }
 }
