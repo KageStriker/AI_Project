@@ -7,7 +7,10 @@ using System;
 public class StudyState : State<Student>
 {
     private static StudyState _instance;
-    
+    private float timeToStudy;
+    private float energyDrainMultiplier;
+    private float staminaDrainMultiplier;
+
     private StudyState()
     {
         if(_instance != null)
@@ -16,6 +19,10 @@ public class StudyState : State<Student>
         }
 
         _instance = this;
+
+        timeToStudy = 20.0f;
+        energyDrainMultiplier = 0.9f;
+        staminaDrainMultiplier = 0.6f;
     }
 
     public static StudyState Instance
@@ -35,7 +42,7 @@ public class StudyState : State<Student>
     {
         Debug.Log("Entering Study State");
 
-        _owner.StartCoroutine(_owner.WaitForDuration(10.0f));
+        _owner.StartCoroutine(_owner.WaitForDuration(timeToStudy));
     }
 
     public override void ExitState(Student _owner)
@@ -51,7 +58,7 @@ public class StudyState : State<Student>
             _owner.waitComplete = false;
         }
 
-        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * 1.1f));
-        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * 0.8f));
+        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * energyDrainMultiplier));
+        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * staminaDrainMultiplier));
     }
 }

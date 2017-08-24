@@ -7,6 +7,7 @@ using System;
 public class NewClassState : State<Student>
 {
     private static NewClassState _instance;
+    private List<Student> studentsEnrolled;
     
     private NewClassState()
     {
