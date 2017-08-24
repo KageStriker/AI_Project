@@ -35,12 +35,26 @@ public class CalculateTaskState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering Calculate Task State");
-        if (_owner.GetGroupMoney() > 500)
+        if (_owner.GetMoney() > 50 && _owner.GetGroupMoney() > 500)
         {
             _owner.STE = StateToEnter.NewClassroom;
         }
         else if (_owner.GetMoney() < 10 && _owner.GetEnergy() > 20 && _owner.GetStamina() > 20 || _owner.GetMoney() < 10 && _owner.GetStamina() > 20 && _owner.GetEnergy() > 20)
         {
+            if (_owner.StateMachine.previousState == WorkState.Instance)
+                _owner.useIndex = true;
+            else
+                _owner.useIndex = false;
+
+            _owner.STE = StateToEnter.Work;
+        }
+        else if (_owner.GetGroupMoney() < 500 && _owner.GetMoney() < 50 && _owner.GetStamina() > 80 && _owner.GetEnergy() > 80)
+        {
+            if (_owner.StateMachine.previousState == WorkState.Instance)
+                _owner.useIndex = true;
+            else
+                _owner.useIndex = false;
+
             _owner.STE = StateToEnter.Work;
         }
         else if (_owner.GetEnergy() >= 50 && _owner.GetStamina() >= 50)
@@ -82,6 +96,7 @@ public class CalculateTaskState : State<Student>
                     _owner.useIndex = true;
                 else
                     _owner.useIndex = false;
+
                 _owner.STE = StateToEnter.Study;
             }
         }
@@ -91,6 +106,7 @@ public class CalculateTaskState : State<Student>
                 _owner.useIndex = true;
             else
                 _owner.useIndex = false;
+
             _owner.STE = StateToEnter.Study;
         }
 
