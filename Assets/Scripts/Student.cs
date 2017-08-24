@@ -12,11 +12,14 @@ public class Student : MonoBehaviour
 
     protected float hunger = 0;
     protected float reputation = 0;
-    protected float money = 30;
+    public float money = 30;
+    protected static int groupMoney;
 
     protected int locationIndex;
 
     public bool waitComplete;
+    public bool useIndex;
+    public bool paid;
 
     public StateToEnter STE;
 
@@ -31,6 +34,8 @@ public class Student : MonoBehaviour
     {
         nmAgent = GetComponent<NavMeshAgent>();
         StateMachine = new StudentFSM<Student>(this);
+
+        nmAgent.angularSpeed = 1000;
 
         StateMachine.ChangeState(CalculateTaskState.Instance);
     }
@@ -61,6 +66,11 @@ public class Student : MonoBehaviour
         return reputation;
     }
 
+    public int GetGroupMoney()
+    {
+        return groupMoney;
+    }
+
     public int GetMoney()
     {
         return Mathf.RoundToInt(money);
@@ -75,7 +85,7 @@ public class Student : MonoBehaviour
     {
         return locationIndex;
     }
-    
+
     public void SetLocationIndex(int _locationIndex)
     {
         locationIndex = _locationIndex;
@@ -99,6 +109,11 @@ public class Student : MonoBehaviour
     public void SetRep(float _reputation)
     {
         reputation = _reputation;
+    }
+
+    public void GetGroupMoney(int _groupMoney)
+    {
+        groupMoney = _groupMoney;
     }
 
     public void SetMoney(int _money)

@@ -138,72 +138,155 @@ public class MoveToTaskState : State<Student>
         switch (_owner.STE)
         {
             case StateToEnter.Study:
-                for(int i = 0; i < studyAreas.Count; i++)
+                if (!_owner.useIndex)
                 {
-                    if (!studyOpenings[i])
+                    for (int i = 0; i < studyAreas.Count; i++)
                     {
-                        continue;
+                        if (!studyOpenings[i])
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (_owner.nmAgent.isStopped)
+                                _owner.nmAgent.isStopped = false;
+
+                            _owner.nmAgent.SetDestination(studyAreas[i].transform.position);
+                            _owner.finalDestination = studyAreas[i].transform.position;
+                            _owner.SetLocationIndex(i);
+
+                            studyOpenings[i] = false;
+
+                            break;
+                        }
                     }
-                    else
-                    {
-                        if (_owner.nmAgent.isStopped)
-                            _owner.nmAgent.isStopped = false;
+                }
+                else if (_owner.useIndex)
+                {
+                    if (_owner.nmAgent.isStopped)
+                        _owner.nmAgent.isStopped = false;
 
-                        _owner.nmAgent.SetDestination(studyAreas[i].transform.position);
-                        _owner.finalDestination = studyAreas[i].transform.position;
-                        _owner.SetLocationIndex(i);
+                    _owner.nmAgent.SetDestination(studyAreas[_owner.GetLocationIndex()].transform.position);
+                    _owner.finalDestination = studyAreas[_owner.GetLocationIndex()].transform.position;
+                    _owner.SetLocationIndex(_owner.GetLocationIndex());
 
-                        studyOpenings[i] = false;
-
-                        break;
-                    }
+                    studyOpenings[_owner.GetLocationIndex()] = false;
                 }
                 break;
             case StateToEnter.Eat:
-                for (int i = 0; i < eatingAreas.Count; i++)
+                if (!_owner.useIndex)
                 {
-                    if (!eatingOpenings[i])
+                    for (int i = 0; i < eatingAreas.Count; i++)
                     {
-                        continue;
+                        if (!eatingOpenings[i])
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (_owner.nmAgent.isStopped)
+                                _owner.nmAgent.isStopped = false;
+
+                            _owner.nmAgent.SetDestination(eatingAreas[i].transform.position);
+                            _owner.finalDestination = eatingAreas[i].transform.position;
+                            _owner.SetLocationIndex(i);
+
+                            eatingOpenings[i] = false;
+
+                            break;
+                        }
                     }
-                    else
-                    {
-                        if (_owner.nmAgent.isStopped)
-                            _owner.nmAgent.isStopped = false;
+                }
+                else if (_owner.useIndex)
+                {
+                    if (_owner.nmAgent.isStopped)
+                        _owner.nmAgent.isStopped = false;
 
-                        _owner.nmAgent.SetDestination(eatingAreas[i].transform.position);
-                        _owner.finalDestination = eatingAreas[i].transform.position;
-                        _owner.SetLocationIndex(i);
+                    _owner.nmAgent.SetDestination(eatingAreas[_owner.GetLocationIndex()].transform.position);
+                    _owner.finalDestination = eatingAreas[_owner.GetLocationIndex()].transform.position;
+                    _owner.SetLocationIndex(_owner.GetLocationIndex());
 
-                        eatingOpenings[i] = false;
+                    eatingOpenings[_owner.GetLocationIndex()] = false;
 
-                        break;
-                    }
+                    break;
+
                 }
                 break;
             case StateToEnter.Sleep:
-                for (int i = 0; i < sleepAreas.Count; i++)
+                if (!_owner.useIndex)
                 {
-                    if (!sleepOpenings[i])
+                    for (int i = 0; i < sleepAreas.Count; i++)
                     {
-                        continue;
+                        if (!sleepOpenings[i])
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (_owner.nmAgent.isStopped)
+                                _owner.nmAgent.isStopped = false;
+
+                            _owner.nmAgent.SetDestination(sleepAreas[i].transform.position);
+                            _owner.finalDestination = sleepAreas[i].transform.position;
+                            _owner.SetLocationIndex(i);
+
+                            sleepOpenings[i] = false;
+
+                            break;
+                        }
                     }
-                    else
-                    {
-                        if (_owner.nmAgent.isStopped)
-                            _owner.nmAgent.isStopped = false;
+                }
+                else if (_owner.useIndex)
+                {
+                    if (_owner.nmAgent.isStopped)
+                        _owner.nmAgent.isStopped = false;
 
-                        _owner.nmAgent.SetDestination(sleepAreas[i].transform.position);
-                        _owner.finalDestination = sleepAreas[i].transform.position;
-                        _owner.SetLocationIndex(i);
+                    _owner.nmAgent.SetDestination(sleepAreas[_owner.GetLocationIndex()].transform.position);
+                    _owner.finalDestination = sleepAreas[_owner.GetLocationIndex()].transform.position;
+                    _owner.SetLocationIndex(_owner.GetLocationIndex());
 
-                        sleepOpenings[i] = false;
+                    sleepOpenings[_owner.GetLocationIndex()] = false;
 
-                        break;
-                    }
+                    break;
                 }
                 break;
             case StateToEnter.Work:
+                if (!_owner.useIndex)
+                {
+                    for (int i = 0; i < workAreas.Count; i++)
+                    {
+                        if (!workOpenings[i])
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (_owner.nmAgent.isStopped)
+                                _owner.nmAgent.isStopped = false;
+
+                            _owner.nmAgent.SetDestination(workAreas[i].transform.position);
+                            _owner.finalDestination = workAreas[i].transform.position;
+                            _owner.SetLocationIndex(i);
+
+                            workOpenings[i] = false;
+
+                            break;
+                        }
+                    }
+                }
+                else if (_owner.useIndex)
+                {
+                    if (_owner.nmAgent.isStopped)
+                        _owner.nmAgent.isStopped = false;
+
+                    _owner.nmAgent.SetDestination(workAreas[_owner.GetLocationIndex()].transform.position);
+                    _owner.finalDestination = workAreas[_owner.GetLocationIndex()].transform.position;
+                    _owner.SetLocationIndex(_owner.GetLocationIndex());
+
+                    workOpenings[_owner.GetLocationIndex()] = false;
+
+                    break;
+                }
                 break;
             case StateToEnter.Graduate:
                 break;
@@ -238,6 +321,7 @@ public class MoveToTaskState : State<Student>
                 sleepOpenings[_owner.GetLocationIndex()] = true;
                 break;
             case StateToEnter.Work:
+                workOpenings[_owner.GetLocationIndex()] = true;
                 break;
             case StateToEnter.Graduate:
                 break;

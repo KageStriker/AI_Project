@@ -6,6 +6,7 @@ using States;
 public class EatState : State<Student>
 {
     private static EatState _instance;
+    private static bool paid;
 
     private EatState()
     {
@@ -39,11 +40,18 @@ public class EatState : State<Student>
     {
         Debug.Log("Exiting Eating State");
         _owner.SetEnergy(100);
+        _owner.paid = false;
     }
 
     public override void UpdateState(Student _owner)
     {
         _owner.SetEnergy(_owner.GetEnergy() + (Time.deltaTime * 10.0f));
+
+        if (!_owner.paid)
+        {
+            _owner.SetMoney(_owner.GetMoney() - 5);
+            _owner.paid = true;
+        }
 
         if (_owner.GetEnergy() >= 100)
         {
