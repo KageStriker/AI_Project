@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Student : MonoBehaviour
 {
+    #region Variables
     public float energy = 100;
     public float stamina = 100;
 
@@ -26,9 +27,9 @@ public class Student : MonoBehaviour
     public Vector3 finalDestination;
 
     public NavMeshAgent nmAgent;
-    
-    public StudentFSM<Student> StateMachine { get; set; }
 
+    public StudentFSM<Student> StateMachine { get; set; }
+    #endregion
 
     private void Start()
     {
@@ -111,7 +112,7 @@ public class Student : MonoBehaviour
         reputation = _reputation;
     }
 
-    public void GetGroupMoney(int _groupMoney)
+    public void SetGroupMoney(int _groupMoney)
     {
         groupMoney = _groupMoney;
     }

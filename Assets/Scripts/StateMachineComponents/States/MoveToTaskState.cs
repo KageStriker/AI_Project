@@ -209,7 +209,6 @@ public class MoveToTaskState : State<Student>
                     eatingOpenings[_owner.GetLocationIndex()] = false;
 
                     break;
-
                 }
                 break;
             case StateToEnter.Sleep:

@@ -17,6 +17,7 @@ public class NewClassState : State<Student>
         }
 
         _instance = this;
+        studentsEnrolled = new List<Student>();
     }
 
     public static NewClassState Instance
@@ -35,6 +36,21 @@ public class NewClassState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering New Classroom State");
+
+        if (studentsEnrolled != null)
+        {
+            for (int i = 0; i < studentsEnrolled.Count; i++)
+            {
+                if (studentsEnrolled[i] != _owner)
+                {
+                    continue;
+                }
+                else
+                {
+                    studentsEnrolled.Add(_owner);
+                }
+            } 
+        }
     }
 
     public override void ExitState(Student _owner)

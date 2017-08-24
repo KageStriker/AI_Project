@@ -8,6 +8,7 @@ public class WorkState : State<Student>
 {
     private static WorkState _instance;
     private float counter;
+    private float shiftTime;
 
     private WorkState()
     {
@@ -19,6 +20,7 @@ public class WorkState : State<Student>
         _instance = this;
 
         counter = 0;
+        shiftTime = 10.0f;
     }
 
     public static WorkState Instance
@@ -37,6 +39,7 @@ public class WorkState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering Work State");
+        _owner.StartCoroutine(_owner.WaitForDuration(shiftTime));
     }
 
     public override void ExitState(Student _owner)
@@ -46,9 +49,16 @@ public class WorkState : State<Student>
 
     public override void UpdateState(Student _owner)
     {
-        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * 10.0f));
-        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * 10.0f));
+        if (_owner.waitComplete)
+        {
+            _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+            _owner.waitComplete = false;
+        }
+
         counter += Time.deltaTime;
+
+        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * 1.2f));
+        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * 1.2f));
 
         if (counter >= 5)
         {
