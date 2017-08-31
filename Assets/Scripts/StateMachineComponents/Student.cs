@@ -14,6 +14,7 @@ public class Student : MonoBehaviour
     protected float hunger = 0;
     protected float reputation = 0;
     public float money = 30;
+    protected float courseExperience;
     protected static int groupMoney;
 
     protected int locationIndex;
@@ -23,6 +24,8 @@ public class Student : MonoBehaviour
     public bool paid;
 
     public StateToEnter STE;
+
+    public Course currentCourse;
 
     public Vector3 finalDestination;
 
@@ -65,6 +68,11 @@ public class Student : MonoBehaviour
     public float GetRep()
     {
         return reputation;
+    }
+
+    public float GetCourseExp()
+    {
+        return courseExperience;
     }
 
     public int GetGroupMoney()
@@ -110,6 +118,11 @@ public class Student : MonoBehaviour
     public void SetRep(float _reputation)
     {
         reputation = _reputation;
+    }
+
+    public void SetCourseExp(float _courseExperience)
+    {
+        courseExperience = _courseExperience;
     }
 
     public void SetGroupMoney(int _groupMoney)

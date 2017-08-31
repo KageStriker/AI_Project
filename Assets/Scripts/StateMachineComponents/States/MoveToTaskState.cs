@@ -11,6 +11,7 @@ public enum StateToEnter
     Work,
     Graduate,
     DropOut,
+    CourseWork,
     NewClassroom
 }
 

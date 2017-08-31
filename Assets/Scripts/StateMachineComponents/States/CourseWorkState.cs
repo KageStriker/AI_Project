@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using States;
 
-public class GraduateState : State<Student>
+public class CourseWorkState : State<Student>
 {
-    private static GraduateState _instance;
+    private static CourseWorkState _instance;
 
-    private GraduateState()
+    private CourseWorkState()
     {
         if (_instance != null)
         {
@@ -17,13 +17,13 @@ public class GraduateState : State<Student>
         _instance = this;
     }
 
-    public static GraduateState Instance
+    public static CourseWorkState Instance
     {
         get
         {
             if (_instance == null)
             {
-                new GraduateState();
+                new CourseWorkState();
             }
 
             return _instance;
@@ -32,16 +32,17 @@ public class GraduateState : State<Student>
 
     public override void EnterState(Student _owner)
     {
-        Debug.Log("Entering Graduate State");
+        Debug.Log("Entering Idle State");
+
     }
 
     public override void ExitState(Student _owner)
     {
-        Debug.Log("Exiting Graduate State");
+        Debug.Log("Exiting Idle State");
     }
 
     public override void UpdateState(Student _owner)
     {
-       
+
     }
 }
