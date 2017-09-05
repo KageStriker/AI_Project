@@ -26,6 +26,7 @@ public class Student : MonoBehaviour
     public StateToEnter STE;
 
     public Course currentCourse;
+    public List<Course> completedCourses;
 
     public Vector3 finalDestination;
 
@@ -95,6 +96,11 @@ public class Student : MonoBehaviour
         return locationIndex;
     }
 
+    public Course GetCourse()
+    {
+        return currentCourse;
+    }
+
     public void SetLocationIndex(int _locationIndex)
     {
         locationIndex = _locationIndex;
@@ -133,6 +139,16 @@ public class Student : MonoBehaviour
     public void SetMoney(int _money)
     {
         money = _money;
+    }
+
+    public void SetCourse(Course _course)
+    {
+        currentCourse = _course;
+    }
+
+    public void AddCourse(Course _course)
+    {
+        completedCourses.Add(_course);
     }
     #endregion
 
