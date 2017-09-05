@@ -35,9 +35,14 @@ public class CalculateTaskState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering Calculate Task State");
-        if (_owner.GetMoney() > 50 && _owner.GetGroupMoney() > 500)
+        if (_owner.GetCourseExp() >= 100)
         {
-            _owner.STE = StateToEnter.NewClassroom;
+            if (_owner.GetMoney() > 50)
+            {
+                _owner.STE = StateToEnter.NewClassType;
+            }
+            else
+                _owner.STE = StateToEnter.Work;
         }
         else if (_owner.GetMoney() < 10 && _owner.GetEnergy() > 20 && _owner.GetStamina() > 20 || _owner.GetMoney() < 10 && _owner.GetStamina() > 20 && _owner.GetEnergy() > 20)
         {

@@ -12,7 +12,8 @@ public enum StateToEnter
     Graduate,
     DropOut,
     CourseWork,
-    NewClassroom
+    NewClassroom,
+    NewClassType
 }
 
 public class MoveToTaskState : State<Student>
