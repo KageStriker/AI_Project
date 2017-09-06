@@ -60,5 +60,6 @@ public class StudyState : State<Student>
 
         _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * energyDrainMultiplier));
         _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * staminaDrainMultiplier));
+        _owner.SetCourseExp(_owner.GetCourseExp() + (Time.deltaTime * 5.0f));
     }
 }

@@ -14,6 +14,7 @@ public class Student : MonoBehaviour
     protected float hunger = 0;
     protected float reputation = 0;
     public float money = 30;
+    protected float experienceToStart;
     protected float courseExperience;
     protected static int groupMoney;
 
@@ -26,7 +27,6 @@ public class Student : MonoBehaviour
     public StateToEnter STE;
 
     public Course currentCourse;
-    public List<Course> completedCourses;
 
     public Vector3 finalDestination;
 
@@ -50,7 +50,7 @@ public class Student : MonoBehaviour
         StateMachine.Update();
     }
 
-    #region Getters&Setters
+    #region Getters
     public float GetEnergy()
     {
         return energy;
@@ -74,6 +74,11 @@ public class Student : MonoBehaviour
     public float GetCourseExp()
     {
         return courseExperience;
+    }
+    
+    public float GetStartExp()
+    {
+        return experienceToStart;
     }
 
     public int GetGroupMoney()
@@ -100,7 +105,9 @@ public class Student : MonoBehaviour
     {
         return currentCourse;
     }
+    #endregion
 
+    #region Setters
     public void SetLocationIndex(int _locationIndex)
     {
         locationIndex = _locationIndex;
@@ -131,6 +138,11 @@ public class Student : MonoBehaviour
         courseExperience = _courseExperience;
     }
 
+    public void SetStartExp(float _experienceToStart)
+    {
+        experienceToStart = _experienceToStart;
+    }
+
     public void SetGroupMoney(int _groupMoney)
     {
         groupMoney = _groupMoney;
@@ -144,11 +156,6 @@ public class Student : MonoBehaviour
     public void SetCourse(Course _course)
     {
         currentCourse = _course;
-    }
-
-    public void AddCourse(Course _course)
-    {
-        completedCourses.Add(_course);
     }
     #endregion
 

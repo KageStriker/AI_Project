@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using States;
 
+// A = 1; B = 2; C = 3; D = 4; E = 5; F = 6; G = 7; H = 8; 
+// J = 9; K = 10; L = 11; M = 12; X = 13; Y = 14; Z = 15;
+
 public class NewClassTypeState : State<Student>
 {
     private static NewClassTypeState _instance;
@@ -34,83 +37,93 @@ public class NewClassTypeState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering New Classroom Type State");
-        if(_owner.GetCourse() == null)
+        if (_owner.GetCourse() == null)
         {
             _owner.SetCourse(courses.A);
         }
         else
-            for(int i = 0; i < _owner.completedCourses.Count; i++)
+        {
+            // A = 1; B = 2; C = 3; D = 4; E = 5; F = 6; G = 7; H = 8; 
+            // J = 9; K = 10; L = 11; M = 12; X = 13; Y = 14; Z = 15;
+
+            switch (_owner.GetCourse().courseValue)
             {
-                if (_owner.currentCourse.name == "A")
-                {
+                case 1:
+                    _owner.SetCourse(courses.A);
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 2:
                     _owner.SetCourse(courses.B);
-                }
-                else if (_owner.currentCourse.name == "B")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 3:
                     _owner.SetCourse(courses.C);
-                }
-                else if (_owner.currentCourse.name == "C")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 4:
                     _owner.SetCourse(courses.D);
-                }
-                else if (_owner.currentCourse.name == "D")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 5:
                     _owner.SetCourse(courses.E);
-                }
-                else if (_owner.currentCourse.name == "E")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 6:
                     _owner.SetCourse(courses.F);
-                }
-                else if (_owner.currentCourse.name == "F")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 7:
                     _owner.SetCourse(courses.G);
-                }
-                else if (_owner.currentCourse.name == "G")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 8:
                     _owner.SetCourse(courses.H);
-                }
-                else if (_owner.currentCourse.name == "H")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 9:
                     _owner.SetCourse(courses.J);
-                }
-                else if (_owner.currentCourse.name == "J")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 10:
                     _owner.SetCourse(courses.K);
-                }
-                else if (_owner.currentCourse.name == "K")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 11:
                     _owner.SetCourse(courses.L);
-                }
-                else if (_owner.currentCourse.name == "L")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 12:
                     _owner.SetCourse(courses.M);
-                }
-                else if (_owner.currentCourse.name == "M")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 13:
                     _owner.SetCourse(courses.X);
-                }
-                else if (_owner.currentCourse.name == "X")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 14:
                     _owner.SetCourse(courses.Y);
-                }
-                else if (_owner.currentCourse.name == "Y")
-                {
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
+                case 15:
                     _owner.SetCourse(courses.Z);
-                }
-                else if (_owner.currentCourse.name == "Z")
-                {
-                    _owner.StateMachine.ChangeState(GraduateState.Instance);
-                }
+                    _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
+                    break;
             }
+
+        }
     }
 
     public override void ExitState(Student _owner)
     {
         Debug.Log("Exiting New Classroom Type State");
+        if (_owner.currentCourse != null && _owner.StateMachine.previousState != NewClassTypeState.Instance)
+        {
+            _owner.SetMoney(_owner.GetMoney() - _owner.currentCourse.coursePrice);
+        }
     }
 
     public override void UpdateState(Student _owner)
     {
-
+        
     }
 }

@@ -6,6 +6,9 @@ using States;
 public class CourseWorkState : State<Student>
 {
     private static CourseWorkState _instance;
+    private float timeToStudy;
+    private float energyDrainMultiplier;
+    private float staminaDrainMultiplier;
 
     private CourseWorkState()
     {
@@ -15,6 +18,10 @@ public class CourseWorkState : State<Student>
         }
 
         _instance = this;
+
+        timeToStudy = 20.0f;
+        energyDrainMultiplier = 0.9f;
+        staminaDrainMultiplier = 0.6f;
     }
 
     public static CourseWorkState Instance
@@ -33,6 +40,7 @@ public class CourseWorkState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering Idle State");
+        _owner.StartCoroutine(_owner.WaitForDuration(timeToStudy));
 
     }
 
@@ -43,6 +51,8 @@ public class CourseWorkState : State<Student>
 
     public override void UpdateState(Student _owner)
     {
-
+        _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * staminaDrainMultiplier));
+        _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * energyDrainMultiplier));
+        _owner.SetCourseExp(_owner.GetCourseExp() + (Time.deltaTime * 5.0f));
     }
 }

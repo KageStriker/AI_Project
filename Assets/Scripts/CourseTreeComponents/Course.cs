@@ -5,13 +5,14 @@ using UnityEngine;
 public class Course
 {
     public int coursePrice;
-    public string name;
+    public int courseValue;
     public List<Student> studentsEnrolled;
     public List<Course> dependencies;
 
-    public Course(int _coursePrice, string _name)
+    public Course(int _coursePrice, int _courseValue)
     {
         coursePrice = _coursePrice;
+        courseValue = _courseValue;
     }
 
     public void AddStudent(Student _student)

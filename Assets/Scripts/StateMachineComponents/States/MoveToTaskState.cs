@@ -19,14 +19,16 @@ public enum StateToEnter
 public class MoveToTaskState : State<Student>
 {
     private static MoveToTaskState _instance;
-    
+
     private List<GameObject> studyAreas;
+    private List<GameObject> courseworkAreas;
     private List<GameObject> eatingAreas;
     private List<GameObject> sleepAreas;
     private List<GameObject> workAreas;
     private List<GameObject> classroomAreas;
 
     private bool[] studyOpenings;
+    private bool[] courseworkOpenings;
     private bool[] eatingOpenings;
     private bool[] sleepOpenings;
     private bool[] workOpenings;
@@ -47,6 +49,7 @@ public class MoveToTaskState : State<Student>
         sleepAreas = new List<GameObject>();
         workAreas = new List<GameObject>();
         classroomAreas = new List<GameObject>();
+        courseworkAreas = new List<GameObject>();
         #endregion
 
         #region StudyAreaSetup
@@ -57,9 +60,23 @@ public class MoveToTaskState : State<Student>
 
         studyOpenings = new bool[studyAreas.Count];
 
-        for(int i = 0; i < studyAreas.Count; i++)
+        for (int i = 0; i < studyAreas.Count; i++)
         {
             studyOpenings[i] = true;
+        }
+        #endregion
+
+        #region CourseworkRoomSetup
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("CourseworkArea"))
+        {
+            courseworkAreas.Add(g);
+        }
+
+        courseworkOpenings = new bool[courseworkAreas.Count];
+
+        for (int i = 0; i < courseworkAreas.Count; i++)
+        {
+            courseworkOpenings[i] = true;
         }
         #endregion
 
@@ -294,6 +311,42 @@ public class MoveToTaskState : State<Student>
             case StateToEnter.DropOut:
                 break;
             case StateToEnter.NewClassroom:
+                break;
+            case StateToEnter.CourseWork:
+                if (!_owner.useIndex)
+                {
+                    for (int i = 0; i < courseworkAreas.Count; i++)
+                    {
+                        if (!courseworkOpenings[i])
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (_owner.nmAgent.isStopped)
+                                _owner.nmAgent.isStopped = false;
+
+                            _owner.nmAgent.SetDestination(courseworkAreas[i].transform.position);
+                            _owner.finalDestination = courseworkAreas[i].transform.position;
+                            _owner.SetLocationIndex(i);
+
+                            courseworkOpenings[i] = false;
+
+                            break;
+                        }
+                    }
+                }
+                else if (_owner.useIndex)
+                {
+                    if (_owner.nmAgent.isStopped)
+                        _owner.nmAgent.isStopped = false;
+
+                    _owner.nmAgent.SetDestination(courseworkAreas[_owner.GetLocationIndex()].transform.position);
+                    _owner.finalDestination = courseworkAreas[_owner.GetLocationIndex()].transform.position;
+                    _owner.SetLocationIndex(_owner.GetLocationIndex());
+
+                    courseworkOpenings[_owner.GetLocationIndex()] = false;
+                }
                 break;
         }
 
