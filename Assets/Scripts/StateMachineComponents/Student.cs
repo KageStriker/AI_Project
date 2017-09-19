@@ -15,7 +15,7 @@ public class Student : MonoBehaviour
     protected float reputation = 0;
     public float money = 30;
     protected float experienceToStart;
-    protected float courseExperience;
+    public float courseExperience;
     protected static int groupMoney;
 
     protected int locationIndex;

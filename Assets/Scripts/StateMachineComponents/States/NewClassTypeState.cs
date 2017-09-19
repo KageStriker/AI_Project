@@ -37,9 +37,10 @@ public class NewClassTypeState : State<Student>
     public override void EnterState(Student _owner)
     {
         Debug.Log("Entering New Classroom Type State");
-        if (_owner.GetCourse() == null)
+        if (_owner.GetCourse().courseValue == 0 && _owner.GetCourse() == null)
         {
             _owner.SetCourse(courses.A);
+            _owner.StateMachine.ChangeState(CalculateTaskState.Instance);
         }
         else
         {

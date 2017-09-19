@@ -46,11 +46,12 @@ public class CalculateTaskState : State<Student>
             {
                 allowableIndex++;
                 _owner.STE = StateToEnter.NewClassType;
+                _owner.SetCourseExp(0);
             }
             else
                 WorkStudyEatOrSleep(_owner);
 
-            _owner.SetCourseExp(0);
+            _owner.STE = StateToEnter.CourseWork;
         }
         else if (_owner.GetGroupMoney() < 500 && _owner.GetMoney() < 100 && _owner.GetStamina() > 80 && _owner.GetEnergy() > 80)
         {

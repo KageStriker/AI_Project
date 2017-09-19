@@ -19,7 +19,7 @@ public class CourseWorkState : State<Student>
 
         _instance = this;
 
-        timeToStudy = 20.0f;
+        timeToStudy = 10.0f;
         energyDrainMultiplier = 0.9f;
         staminaDrainMultiplier = 0.6f;
     }
@@ -41,7 +41,6 @@ public class CourseWorkState : State<Student>
     {
         Debug.Log("Entering Idle State");
         _owner.StartCoroutine(_owner.WaitForDuration(timeToStudy));
-
     }
 
     public override void ExitState(Student _owner)
@@ -53,6 +52,12 @@ public class CourseWorkState : State<Student>
     {
         _owner.SetStamina(_owner.GetStamina() - (Time.deltaTime * staminaDrainMultiplier));
         _owner.SetEnergy(_owner.GetEnergy() - (Time.deltaTime * energyDrainMultiplier));
-        _owner.SetCourseExp(_owner.GetCourseExp() + (Time.deltaTime * 5.0f));
+        _owner.SetCourseExp(_owner.GetCourseExp() + (Time.deltaTime * 2.5f));
+
+        if(_owner.GetCourseExp() >= 100)
+        {
+            _owner.SetCourseExp(0);
+            _owner.StateMachine.ChangeState(NewClassTypeState.Instance);
+        }
     }
 }

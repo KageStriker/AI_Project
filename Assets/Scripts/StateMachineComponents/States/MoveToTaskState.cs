@@ -383,6 +383,9 @@ public class MoveToTaskState : State<Student>
                 break;
             case StateToEnter.NewClassroom:
                 break;
+            case StateToEnter.CourseWork:
+                courseworkOpenings[_owner.GetLocationIndex()] = true;
+                break;
         }
     }
 
@@ -417,6 +420,9 @@ public class MoveToTaskState : State<Student>
                     break;
                 case StateToEnter.NewClassroom:
                     _owner.StateMachine.ChangeState(NewClassState.Instance);
+                    break;
+                case StateToEnter.CourseWork:
+                    _owner.StateMachine.ChangeState(CourseWorkState.Instance);
                     break;
             }
         }
